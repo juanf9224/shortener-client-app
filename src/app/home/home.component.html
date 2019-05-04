@@ -1,3 +1,28 @@
-<p>
-  home works!
-</p>
+<mat-divider></mat-divider>
+<div class="container">
+  <div class="row">
+    <form #shortenForm="ngForm" class="w-100" (ngSubmit)="onSubmit($event)">
+      <div class="col-md-12 text-center">
+        <mat-form-field appearance="outline" class="w-75">
+          <mat-label>Url to be shortened</mat-label>
+          <input matInput type="url"
+                 pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+                 name="url" placeholder="Url to be shortened" [(ngModel)]="url.url" required>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12 text-center">
+        <button mat-raised-button color="primary" [disabled]="!shortenForm.form.valid" type="submit">
+          Shorten
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="row m-2" *ngIf="url?.shortUrl">
+    <div class="col-md-12 text-center">
+      <mat-label>Shortened url: {{ url?.shortUrl || '' }}</mat-label>
+      <button mat-icon-button color="primary" [disabled]="false" (click)="goToShortenedUrlSite()">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
