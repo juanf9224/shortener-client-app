@@ -1,3 +1,33 @@
-<p>
-  ranking-dashboard works!
-</p>
+<div class="container">
+  <div class="row w-100">
+    <div class="col-md-12">
+      <mat-toolbar color="primary"><span>{{title}}</span></mat-toolbar>
+      <mat-divider [inset]="true"></mat-divider>
+    </div>
+    <div class="col-md-12 text-center">
+      <cdk-virtual-scroll-viewport itemSize="20" class="w-100 cdk-viewport-style">
+        <mat-card *cdkVirtualFor="let url of urls" class="order-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ url.url }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row w-100">
+              <div class="col-md-6">Short Url:</div><div class="col-md-6">{{ url.shortUrl }}</div>
+              <div class="col-md-6">Visits</div><div class="col-md-6">{{ url.visits }}</div>
+              <div class="col-md-6"></div><div class="col-md-6">
+              <button mat-icon-button (click)="goToShortenedUrlSite(url.shortUrl)">
+                <mat-icon>open_in_new</mat-icon>
+              </button>
+            </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>
+
+
+

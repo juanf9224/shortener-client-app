@@ -19,4 +19,8 @@ export class UrlShortenerService {
   visitShortUrl(shortUrl: string): Observable<HttpResponse<IUrl>> {
     return this.http.get<IUrl>(`${this.resourceUrl}/visit/${shortUrl}`, { observe: 'response' });
   }
+
+  topRanking(): Observable<HttpResponse<IUrl[]>> {
+    return this.http.get<IUrl[]>(`${this.resourceUrl}/findTop`, { observe: 'response' });
+  }
 }
