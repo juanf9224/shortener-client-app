@@ -63,3 +63,9 @@ th {
     overflow: hidden !important;
   }
 }
+
+.table-container{
+  overflow: scroll;
+  overflow-y: hidden;
+  //overflow-x: hidden;
+}
