@@ -3,6 +3,8 @@ import {ReplaySubject} from 'rxjs';
 import {UrlShortenerService} from '../providers/url-shortener.service';
 import {IUrl} from '../shared/model/url/url.model';
 import {takeUntil} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-ranking-dashboard',
@@ -15,7 +17,8 @@ export class RankingDashboardComponent implements OnInit, OnDestroy {
   urls: IUrl[];
 
   constructor(
-    private shortenerService: UrlShortenerService
+    private shortenerService: UrlShortenerService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -36,9 +39,12 @@ export class RankingDashboardComponent implements OnInit, OnDestroy {
     this.shortenerService.visitShortUrl(shortUrl)
       .pipe(takeUntil(this.destroyServices$))
       .subscribe(res => {
-        console.log(res);
+        this.loadAll();
         window.open(res.body.url);
-      });
+      },
+        (err: HttpErrorResponse) => {
+          this.snackBar.open(`Could not open url: ${shortUrl} - error: ${err.message}`, 'Ok');
+        });
   }
 
   // make sure to unsubscribe when component is destroyed

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUrl} from '../shared/model/url/url.model';
 
@@ -12,8 +12,8 @@ export class UrlShortenerService {
 
   constructor(private http: HttpClient) { }
 
-  shortenUrl(url: IUrl): Observable<HttpResponse<IUrl>> {
-    return this.http.post<IUrl>(`${this.resourceUrl}/shorten`, url, { observe: 'response' });
+  shortenUrl(param: string): Observable<HttpResponse<IUrl>> {
+    return this.http.post<IUrl>(`${this.resourceUrl}/shorten`, { url: param }, { observe: 'response' });
   }
 
   visitShortUrl(shortUrl: string): Observable<HttpResponse<IUrl>> {

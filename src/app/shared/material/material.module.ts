@@ -16,7 +16,8 @@ import {
   MatSnackBarModule,
   MatDialogModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -41,7 +42,8 @@ import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
       MatSnackBarModule,
       MatDialogModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatProgressBarModule
     ],
     exports: [
       MatButtonModule,
@@ -62,7 +64,8 @@ import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
       MatSnackBarModule,
       MatDialogModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatProgressBarModule
     ]
 })
 export class CustomMaterialModule {}
