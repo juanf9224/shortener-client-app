@@ -34,7 +34,6 @@ export class RankingDashboardComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyServices$))
       .subscribe(res => {
         this.dataSource = new UrlDataSource(res.body);
-        console.log(this.urls);
       });
   }
 
