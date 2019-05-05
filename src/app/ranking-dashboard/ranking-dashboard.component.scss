@@ -56,3 +56,10 @@ th {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+@media(max-width: 500px){
+  .cdk-column-title {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+}
