@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.loading = true;
-    console.log(this.url);
+    // validate if string contains http:// or https:// otherwise return the url with http://
+    this.url = this.isUri(this.url);
+    // console.log(this.url, this.isUri(this.url));
     // shorten typed url
     this.shortenService.shortenUrl(this.url)
       .pipe(takeUntil(this.destroyServices$))
@@ -45,6 +47,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           console.log(`error: ${err.message}`);
           this.loading = false;
         });
+  }
+
+  private isUri(url: string) {
+    return url.includes('http://') || url.includes('https://') ? url : `http://${url}`;
   }
 
   // Redirect to shortened site
