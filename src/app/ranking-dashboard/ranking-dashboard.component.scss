@@ -1,0 +1,71 @@
+@import '../../styles.scss';
+
+.container {
+  display: flex;
+  align-self: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $scroll-bar-bg;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
+.cdk-viewport-style {
+  height: 600px;
+  //width: 100%;
+}
+
+.url-card {
+  margin: 2px 0px 3px 0px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+.cdk-column-title {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 45% !important;
+  width: 45% !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+@media(max-width: 500px){
+  .cdk-column-title {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+}
+
+.table-container{
+  overflow: scroll;
+  overflow-y: hidden;
+  //overflow-x: hidden;
+}
