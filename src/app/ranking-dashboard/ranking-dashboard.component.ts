@@ -1,10 +1,12 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {ReplaySubject} from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {UrlShortenerService} from '../providers/url-shortener.service';
 import {IUrl} from '../shared/model/url/url.model';
 import {takeUntil} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material';
+import {DataSource} from '@angular/cdk/table';
+import {Data} from '@angular/router';
 
 @Component({
   selector: 'app-ranking-dashboard',
@@ -14,7 +16,8 @@ import {MatSnackBar} from '@angular/material';
 export class RankingDashboardComponent implements OnInit, OnDestroy {
   title = 'Top 100 visited urls';
   destroyServices$: ReplaySubject<boolean> = new ReplaySubject(1);
-  urls: IUrl[];
+  displayedColumns: string[] = ['no', 'url', 'title', 'visits', 'shortUrl', 'goTo'];
+  dataSource: UrlDataSource;
 
   constructor(
     private shortenerService: UrlShortenerService,
@@ -30,7 +33,7 @@ export class RankingDashboardComponent implements OnInit, OnDestroy {
     this.shortenerService.topRanking()
       .pipe(takeUntil(this.destroyServices$))
       .subscribe(res => {
-        this.urls = res.body;
+        this.dataSource = new UrlDataSource(res.body);
         console.log(this.urls);
       });
   }
@@ -54,4 +57,21 @@ export class RankingDashboardComponent implements OnInit, OnDestroy {
     this.destroyServices$.complete();
   }
 
+}
+
+// DataSource to provide data that should be rendered in the table
+export class UrlDataSource extends DataSource<IUrl> {
+  // Stream of data provided to table
+  data: BehaviorSubject<IUrl[]>;
+
+  constructor(ds: IUrl[]) {
+    super();
+    this.data  = new BehaviorSubject<IUrl[]>(ds);
+  }
+
+  connect(): Observable<IUrl[]> {
+    return this.data;
+  }
+
+  disconnect() {}
 }

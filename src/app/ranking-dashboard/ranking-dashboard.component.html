@@ -1,30 +1,49 @@
 <div class="container">
   <div class="row w-100">
     <div class="col-md-12">
-      <mat-toolbar color="primary"><span>{{title}}</span></mat-toolbar>
+      <mat-toolbar color="accent"><span>{{title}}</span></mat-toolbar>
       <mat-divider [inset]="true"></mat-divider>
     </div>
-    <div class="col-md-12 text-center">
-      <cdk-virtual-scroll-viewport itemSize="20" class="w-100 cdk-viewport-style">
-        <mat-card *cdkVirtualFor="let url of urls; let idx = index;" class="order-card">
-          <mat-card-header>
-            <mat-card-title>
-              {{(idx + 1) + ' - ' + url.url }}
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row w-100">
-              <div class="col-md-12 text-center mat-h4">Short Url: {{ url.shortUrl }}</div>
-              <div class="col-md-12 text-center mat-h4">Visits {{ url.visits }}</div>
-            </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-mini-fab (click)="goToShortenedUrlSite(url.shortUrl)" color="primary">
-              <mat-icon>open_in_new</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </cdk-virtual-scroll-viewport>
+    <div class="col-md-12">
+        <table cdk-table [dataSource]="dataSource">
+
+          <ng-container cdkColumnDef="no">
+            <th cdk-header-cell *cdkHeaderCellDef> No. </th>
+            <td cdk-cell *cdkCellDef="let idx = index"> {{(idx+1)}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="url">
+            <th cdk-header-cell *cdkHeaderCellDef> Url </th>
+            <td cdk-cell *cdkCellDef="let url"> {{url.url}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="title">
+            <th cdk-header-cell *cdkHeaderCellDef> Title </th>
+            <td cdk-cell *cdkCellDef="let url"> {{url.title}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="visits">
+            <th cdk-header-cell *cdkHeaderCellDef> Visits </th>
+            <td cdk-cell *cdkCellDef="let url"> {{url.visits}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="shortUrl">
+            <th cdk-header-cell *cdkHeaderCellDef> Short Url </th>
+            <td cdk-cell *cdkCellDef="let url"> {{url.shortUrl}} </td>
+          </ng-container>
+
+          <ng-container cdkColumnDef="goTo">
+            <th cdk-header-cell *cdkHeaderCellDef> Go to </th>
+            <td cdk-cell *cdkCellDef="let url">
+              <button mat-icon-button (click)="goToShortenedUrlSite(url.shortUrl)" color="primary">
+                <mat-icon>open_in_new</mat-icon>
+              </button> </td>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
   </div>
 </div>

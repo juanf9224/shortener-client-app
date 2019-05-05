@@ -35,3 +35,24 @@
 .url-card {
   margin: 2px 0px 3px 0px;
 }
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+.cdk-column-title {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 45% !important;
+  width: 45% !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

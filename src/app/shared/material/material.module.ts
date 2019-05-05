@@ -20,7 +20,9 @@ import {
   MatProgressBarModule
 } from '@angular/material';
 
-import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ScrollingModule,
+  ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
     imports: [
@@ -43,7 +45,8 @@ import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
       MatDialogModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      CdkTableModule
     ],
     exports: [
       MatButtonModule,
@@ -65,7 +68,8 @@ import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
       MatDialogModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatProgressBarModule
+      MatProgressBarModule,
+      CdkTableModule
     ]
 })
 export class CustomMaterialModule {}
